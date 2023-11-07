@@ -9,6 +9,7 @@ import com.samjayworldwide.blogTaskWithSecurity.entity.Comment;
 import com.samjayworldwide.blogTaskWithSecurity.service.CommentService;
 import com.samjayworldwide.blogTaskWithSecurity.service.PostService;
 import com.samjayworldwide.blogTaskWithSecurity.service.UserService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,60 +49,72 @@ public class UserControllerTest {
         this.commentService = commentService;
         this.objectMapper = new ObjectMapper();
     }
+    @BeforeEach
+    public void theUser(){
+        UserRequestDto userRequestDto = UserRequestDto
+                .builder()
+                .firstName("nicholas")
+                .lastName("jackson")
+                .email("nicholasJackson.gmail.com")
+                .password("nicholas@gmail.com")
+                .retypePassword("nicholas@gmail.com")
+                .build();
+        userService.registerNewUser(userRequestDto);
+    }
 
-//    @Test
-//    @WithMockUser(username = "junior@email.com",password = "samjay2000",roles = "USER")
-//    public void testThatUserControllerReturnsHttpStatusIsCreated() throws Exception {
-//         UserRequestDto userRequestDto = UserRequestDto
-//                 .builder()
-//                 .firstName("nicholas")
-//                 .lastName("jackson")
-//                 .email("nicholasJackson.gmail.com")
-//                 .password("nicholas@gmail.com")
-//                 .retypePassword("nicholas@gmail.com")
-//                 .build();
-//         userService.registerNewUser(userRequestDto);
-//         PostRequestDto postRequestDto = PostRequestDto
-//                 .builder()
-//                 .content("Think like a Man")
-//                 .category("book")
-//                 .build();
-//         postService.writeAPost(postRequestDto,1L);
-//
-//        CommentRequestDto commentRequestDto = CommentRequestDto
-//                .builder()
-//                .message("LovelyPost")
-//                .build();
-//        String commentJson =  objectMapper.writeValueAsString(commentRequestDto);
-//
-//
-//        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/api/v1/users/addAComment/1/1")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(commentJson)
-//
-//        ).andExpect(MockMvcResultMatchers.status().isCreated());
-//    }
-
-
-//    @Test
-//    @WithMockUser(username = "junior@email.com",password = "samjay2000",roles = "USER")
-//    public void testThatUserControllerReturnsACreatedComment() throws Exception {
-//        CommentRequestDto commentRequestDto = CommentRequestDto
-//                .builder()
-//                .message("LovelyPost")
-//                .build();
-//        String commentJson =  objectMapper.writeValueAsString(commentRequestDto);
-//
-//
-//        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/api/v1/users/addAComment/1/1")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(commentJson)
-//
-//        ).andExpect(MockMvcResultMatchers.jsonPath("$.message").value("LovelyPost")
-//        );
-//    }
 
     @Test
+    @WithMockUser(username = "nicholasJackson.gmail.com",password = "nicholas@gmail.com",roles = "USER")
+    public void testThatUserControllerReturnsHttpStatusIsCreated() throws Exception {
+         PostRequestDto postRequestDto = PostRequestDto
+                 .builder()
+                 .content("Think like a Man")
+                 .category("book")
+                 .build();
+         postService.writeAPost(postRequestDto,1L);
+
+        CommentRequestDto commentRequestDto = CommentRequestDto
+                .builder()
+                .message("LovelyPost")
+                .build();
+        String commentJson =  objectMapper.writeValueAsString(commentRequestDto);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/api/v1/users/addAComment/1/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(commentJson)
+
+        ).andExpect(MockMvcResultMatchers.status().isCreated());
+    }
+
+
+    @Test
+    @WithMockUser(username = "junior@email.com",password = "samjay2000",roles = "USER")
+    public void testThatUserControllerReturnsACreatedComment() throws Exception {
+
+        PostRequestDto postRequestDto = PostRequestDto
+                .builder()
+                .content("Think like a Man")
+                .category("book")
+                .build();
+        postService.writeAPost(postRequestDto,1L);
+
+        CommentRequestDto commentRequestDto = CommentRequestDto
+                .builder()
+                .message("LovelyPost")
+                .build();
+        String commentJson =  objectMapper.writeValueAsString(commentRequestDto);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/api/v1/users/addAComment/1/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(commentJson)
+
+        ).andExpect(MockMvcResultMatchers.jsonPath("$.message").value("LovelyPost")
+        );
+    }
+
+     @Test
     @WithMockUser(username = "junior@email.com",password = "samjay2000",roles = "USER")
     public void testThatUserControllerReturnsHttpStatusNoContent() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/api/v1/users/deleteAComment/1/1")
