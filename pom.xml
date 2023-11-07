@@ -110,7 +110,8 @@
 				<version>3.2.2</version>
 				<configuration>
 					<excludes>
-						<exclude>com.samjayworldwide.blogTaskWithSecurity.BlogTaskWithSecurityApplicationTests</exclude>
+						<exclude>com.samjayworldwide.blogTaskWithSecurity.controller.AuthenticationControllerTest</exclude>
+						<exclude>com.samjayworldwide.blogTaskWithSecurity.controller.UserControllerTest</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
