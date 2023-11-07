@@ -44,4 +44,4 @@ jobs:
         mkdir config
         echo 'spring.datasource.url=jdbc:postgresql://localhost:5432/BlogTaskSecurity' > config/application.properties
     - name: Build with Maven
-      run: mvn --batch-mode --update-snapshots verify
+      run: mvn clean verify
