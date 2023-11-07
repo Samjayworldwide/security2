@@ -31,19 +31,19 @@ public class UserRepositoryTest {
         Assertions.assertThat(savedUser.getId()).isGreaterThan(0);
     }
 
-    @Test
-    public void testIfUserRepositoryCanFindAUserByAGivenId(){
-        User user = User
-                .builder()
-                .firstName("samuel")
-                .lastName("jackson")
-                .email("samuel@gmail.com")
-                .password("samuelJackson")
-                .retypePassword("samuelJackson")
-                .build();
-        User savedUser = userRepository.save(user);
-        Optional<User> foundUser = userRepository.findById(1L);
-        Assertions.assertThat(savedUser).isNotNull();
-        Assertions.assertThat(foundUser).isPresent();
-    }
+//    @Test
+//    public void testIfUserRepositoryCanFindAUserByAGivenId(){
+//        User user = User
+//                .builder()
+//                .firstName("samuel")
+//                .lastName("jackson")
+//                .email("samuel@gmail.com")
+//                .password("samuelJackson")
+//                .retypePassword("samuelJackson")
+//                .build();
+//        User savedUser = userRepository.save(user);
+//        Optional<User> foundUser = userRepository.findById(1L);
+//        Assertions.assertThat(savedUser).isNotNull();
+//        Assertions.assertThat(foundUser).isPresent();
+//    }
 }

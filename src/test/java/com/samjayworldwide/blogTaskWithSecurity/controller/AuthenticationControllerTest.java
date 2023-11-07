@@ -35,7 +35,7 @@ public class AuthenticationControllerTest {
                 .builder()
                 .firstName("samuel")
                 .lastName("jackson")
-                .email("samuel@gmail.com")
+                .email("pas@gmail.com")
                 .password("samuelJackson")
                 .retypePassword("samuelJackson")
                 .build();
@@ -53,7 +53,7 @@ public class AuthenticationControllerTest {
                 .builder()
                 .firstName("samuel")
                 .lastName("jackson")
-                .email("jackson@gmail.com")
+                .email("bbb@gmail.com")
                 .password("samuelJackson")
                 .retypePassword("samuelJackson")
                 .build();
