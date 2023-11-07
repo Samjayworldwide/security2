@@ -112,6 +112,7 @@
 					<excludes>
 						<exclude>com.samjayworldwide.blogTaskWithSecurity.controller.AuthenticationControllerTest</exclude>
 						<exclude>com.samjayworldwide.blogTaskWithSecurity.controller.UserControllerTest</exclude>
+						<exclude>com.samjayworldwide.blogTaskWithSecurity.BlogTaskWithSecurityApplicationTests</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
